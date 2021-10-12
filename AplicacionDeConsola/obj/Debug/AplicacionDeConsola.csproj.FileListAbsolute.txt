@@ -7,4 +7,3 @@ C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\AplicacionDe
 C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\AplicacionDeConsola\bin\Debug\MATLAB_library.dll
 C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\AplicacionDeConsola\bin\Debug\MATLAB_library.pdb
 C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\AplicacionDeConsola\obj\Debug\AplicacionDeConsola.csproj.AssemblyReference.cache
-C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\AplicacionDeConsola\obj\Debug\AplicacionDeConsola.csproj.CopyComplete
