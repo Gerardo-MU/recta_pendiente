@@ -11,14 +11,14 @@ namespace AplicacionDeConsola
 	{
 		static void Main(string[] args)
 		{
-			double[] x = { 0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1 };
+			double[] x = MATLAB.(0,1,0.1);
 			double m1 = 1;
 			double b1 = 0;
 			double m2 = 1;
 			double b2 = 0;
 
-			double[] y1 = SumArrayEsc(MultEs(x,1),b1);
-			double[] y2 = SumArrayEsc(MultEs(x, 1),b2);
+			double[] y1 = SumArrayEsc(MultEsc(x,1),b1);
+			double[] y2 = SumArrayEsc(MultEsc(x, 1),b2);
 
 			double[] error;
 			double[] SumError;
@@ -28,7 +28,7 @@ namespace AplicacionDeConsola
 			Console.Read();
 
 		}
-		static public double[] MultEs(double[] a, double e)
+		static public double[] MultEsc(double[] a, double e)
 		{
 			double[] output = new double[a.Length];
 			for (int i = 0; i < a.Length; i++)

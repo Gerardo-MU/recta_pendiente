@@ -147,7 +147,7 @@ namespace MATLAB_Library
         /// <param name = "x"> Arreglo de entrada </param>
         /// <returns></returns>
 
-        public double[] Sum(double[] ar1, double[] ar2)
+        public static double[] Sum(double[] ar1, double[] ar2)
         {
             double[] output = new double[ar1.Length];
             for (int i = 0; i < ar1.Length; i++)
@@ -163,7 +163,7 @@ namespace MATLAB_Library
         /// <param name = "x"> Arreglo de entrada </param>
         /// <returns></returns>
 
-        public double[] Diff(double[] ar1, double[] ar2)
+        public static double[] Diff(double[] ar1, double[] ar2)
         {
             double[] output = new double[ar1.Length];
             for (int i = 0; i < ar1.Length; i++)
@@ -180,7 +180,7 @@ namespace MATLAB_Library
         /// <param name = "x2"> Valor final del arreglo </param>
         /// <param name = "n"> espaciado de los datos </param>
         /// <returns></returns>
-        public double[] Linspace(double x1, double x2, double n)
+        public static double[] Linspace(double x1, double x2, double n)
         {
             double paso = n;
             int l = Convert.ToInt32(((Math.Abs(x2 - x1)) / paso) + 1);
