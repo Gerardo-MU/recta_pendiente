@@ -1,0 +1,6 @@
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\bin\Debug\MATLAB_library.dll
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\bin\Debug\MATLAB_library.pdb
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\obj\Debug\MATLAB_library.csproj.AssemblyReference.cache
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\obj\Debug\MATLAB_library.csproj.CoreCompileInputs.cache
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\obj\Debug\MATLAB_library.dll
+C:\Users\devas\OneDrive\Documents\Nueva carpeta\AplicacionDeConsola\MATLAB_library\obj\Debug\MATLAB_library.pdb
