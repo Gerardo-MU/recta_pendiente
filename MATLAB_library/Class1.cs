@@ -1,36 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MATLAB_Library
 {
-    public class F_Arrays
+    public class Arrays
     {
-
-        /// <summary>
-        /// Retorna la suma de los valores de un arreglo
-        /// </summary>
-        /// <param name = "x"> Arreglo de entrada </param>
-        /// <returns></returns>
-        public double SumList(double[] x)
-        {
-            double output = 0;
-            for (int i = 0; i < x.Count(); i++)
-            {
-                output = output + x[i];
-            }
-            return output;
-        }
-
         /// <summary>
         /// Regresa la suma de dos arreglos elemento por elemento en un nuevo arreglo, todos de la misma dimension
         /// </summary>
         /// <param name="ar1"> Arreglo sumando </param>
         /// <param name="ar2"> Arreglo sumando </param>
         /// <returns></returns>
-        public double[] SumArray(double[] ar1, double[] ar2)
+        public static double[] SumArray(double[] ar1, double[] ar2)
         {
             double[] output = new double[ar1.Length];
             for (int i = 0; i < ar1.Length; i++)
@@ -41,17 +23,57 @@ namespace MATLAB_Library
         }
 
         /// <summary>
-        /// Regresa la resta de dos arreglos elemento por elemento en un nuevo arreglo, todos de la misma dimension
+        /// 
         /// </summary>
-        /// <param name="ar1"> Arreglo restando </param>
-        /// <param name="ar2"> Arreglo restando </param>
+        /// <param name="b"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public double[] DiffArray(double[] ar1, double[] ar2)
+        public static double[] SumArraysEsc(double b, double[] vector)
         {
-            double[] output = new double[ar1.Length];
-            for (int i = 0; i < ar1.Length; i++)
+            double[] output = new double[vector.Length];
+
+            for (int i = 0; i < output.Length; i++)
             {
-                output[i] = ar1[i] - ar2[i];
+                output[i] = vector[i] + b;
+            }
+            return output;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input1"></param>
+        /// <param name="input2"></param>
+        /// <returns></returns>
+        public static double[] DiffArrays(double[] input1, double[] input2)
+        {
+            if (input1.Length != input2.Length)
+            {
+                Console.WriteLine("No son del mismo tamaño");
+                return null;
+            }
+            else
+            {
+                double[] output = new double[input1.Length];
+                for (int i = 0; i < output.Length; i++)
+                {
+                    output[i] = input1[i] - input2[i];
+                }
+                return output;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="esc"></param>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public static double[] MultEsc(double esc, double[] vector)
+        {
+            double[] output = new double[vector.Length];
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] = vector[i] * esc;
             }
             return output;
         }
@@ -64,7 +86,7 @@ namespace MATLAB_Library
         /// <param name="ar2"> Arreglo multiplicado </param>
         /// <param name="esc"> escalar multiplicado </param>
         /// <returns></returns>
-        public double[] MultArray(double[] ar1, double[] ar2)
+        public static double[] MultArray(double[] ar1, double[] ar2)
         {
             double[] output = new double[ar1.Length];
             for (int i = 0; i < ar1.Length; i++)
@@ -74,12 +96,50 @@ namespace MATLAB_Library
             return output;
         }
 
-        public double[] MultArray(double esc, double[] ar1)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static double[] AbsArrayElement(double[] input)
         {
-            double[] output = new double[ar1.Length];
-            for (int i = 0; i < ar1.Length; i++)
+            double[] output = new double[input.Length];
+
+            for (int i = 0; i < output.Length; i++)
             {
-                output[i] = esc * ar1[i];
+                output[i] = Math.Abs(input[i]);
+            }
+            return output;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="esc"></param>
+        /// <returns></returns>
+        public static double[] DivEsc(double[] vector, double esc)
+        {
+            double[] output = new double[vector.Length];
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] = vector[i] / esc;
+            }
+            return output;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="vector2"></param>
+        /// <returns></returns>
+        public static double[] DivArrays(double[] vector, double[] vector2)
+        {
+            double[] output = new double[vector.Length];
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] = vector[i] / vector2[i];
             }
             return output;
         }
@@ -90,7 +150,7 @@ namespace MATLAB_Library
         /// <param name="ar1"> Arreglo de datos 1 </param>
         /// <param name="valor"> Valor deseado para el calculo de los errores </param>
         /// <returns></returns>
-        public double[] EC(double[] ar1, double valor)
+        public static double[] SquareError(double[] ar1, double valor)
         {
             int l = ar1.Length;
             double[] output = new double[l];
@@ -142,21 +202,20 @@ namespace MATLAB_Library
     public class MATLAB 
     {
         /// <summary>
-        /// Devuleve un arreglo de las sumas de sus elementos de manera consecutiva en un nuevo arreglo
+        /// Retorna la suma de los valores de un arreglo
         /// </summary>
         /// <param name = "x"> Arreglo de entrada </param>
         /// <returns></returns>
-
-        public static double[] Sum(double[] ar1, double[] ar2)
+        public static double Sum(double[] vector)
         {
-            double[] output = new double[ar1.Length];
-            for (int i = 0; i < ar1.Length; i++)
+            double output = 0;
+
+            for (int i = 1; i < vector.Length; i++)
             {
-                output[i] = ar1[i] + ar2[i];
+                output = output + vector[i];
             }
             return output;
         }
-
         /// <summary>
         /// Devuleve un arreglo de las diferencias de sus elementos de manera consecutiva en un nuevo arreglo
         /// </summary>
