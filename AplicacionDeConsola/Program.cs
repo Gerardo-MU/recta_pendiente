@@ -8,165 +8,79 @@ namespace AplicacionDeConsola
         static void Main(string[] args)
         {
             double[] x = MATLAB.Linspace(0.1, 1, 0.1);
+            double[] mov = MATLAB.Linspace(0.1, 2.1, 0.1);
             double m1 = 1;
             double b1 = 0;
             double m2 = 0.1;
             double b2 = 0;
 
-            double[] y1 = Arrays.MultEsc(m1, x);
-            y1 = Arrays.SumArraysEsc(b1, y1);
+            double[] error;
+            double[] sumerr;
+            double[] y2;
 
-            double[] y2 = Arrays.MultEsc(m2, x);
-            y2 = Arrays.SumArraysEsc(b2, y2);
+            //Recta 1
+            double[] y1 = Arrays.SumArraysEsc(b1, Arrays.MultEsc(m1, x)); 
+            
+            //========================Desenso Sencillo=====================
 
-            double[] error = Arrays.DiffArrays(y1, y2);
-            error = Arrays.AbsArrayElement(error);
-            error = Arrays.DivArrays(error, y1);
-            error = Arrays.MultEsc(100, error);
+            //Paso 1: Valor Aleatorio
+            double punto = 0.5;
+            y2 = Recta(punto, b2, x);
+            double errorAcum = MATLAB.Sum(PorcentajeError(y1, y2));
 
-            double sumerr = Sum(error);
+            //Paso 2:
+            //----Punto superior
+            double puntoSup = 0.6;
+            y2 = Recta(puntoSup, b2, x);
+            double errorAcumSup = MATLAB.Sum(PorcentajeError(y1, y2));
 
-            double[] M = MATLAB.Linspace(0.1, 2, 0.1);
-            double[] vec_error = new double[M.Length];
+            //---Punto inferior
+            double puntoInf = 0.4;
+            y2 = Recta(puntoInf, b2, x);
+            double errorAcumInf = MATLAB.Sum(PorcentajeError(y1, y2));
 
-            //prueba
-            for (int i = 0; i < vec_error.Length; i++)
+            //Paso 3: Comparar los puntos y definir direccion.
+
+            if (errorAcumInf < errorAcum)
             {
-                y2 = Arrays.MultEsc(M[i], x);
-                y2 = Arrays.SumArraysEsc(b2, y2);
-
-                error = Arrays.DiffArrays(y1, y2);
-                error = Arrays.AbsArrayElement(error);
-                error = Arrays.DivArrays(error, y1);
-                error = Arrays.MultEsc(100, error);
-                vec_error[i] = MATLAB.Sum(error);
+                punto = puntoSup;
+            }
+            else
+            {
+                punto = puntoInf; 
             }
 
-            Arrays.PrintArray(y2);
-            Arrays.PrintArray(vec_error);
+            Console.WriteLine(punto);
+
+            //Prueba de concepto
+
+            y2 = Arrays.MultEsc(mov[1], x);
+            y2 = Arrays.SumArraysEsc(b2, y2);
+
+            error = PorcentajeError(y1, y2);
+            double SumError = MATLAB.Sum(error);
+
+
+            Arrays.PrintArray(error);
             Console.ReadLine();
 
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="b"></param>
-        /// <param name="vector"></param>
-        /// <returns></returns>
-        private static double[] SumArraysEsc(double b, double[] vector)
-        {
-            double[] output = new double[vector.Length];
 
-            for (int i = 0; i < output.Length; i++)
-            {
-                output[i] = vector[i] + b;
-            }
+        private static double[] Recta(double punto, double b2, double[] x)
+        {
+            double[] output = new double[x.Length];
+            output = Arrays.MultEsc(punto, x);
+            output = Arrays.SumArraysEsc(b2, output);
             return output;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input1"></param>
-        /// <param name="input2"></param>
-        /// <returns></returns>
-        public static double[] DiffArrays(double[] input1, double[] input2)
+        private static double[] PorcentajeError(double[] err1, double[] err2)
         {
-            if (input1.Length != input2.Length)
-            {
-                Console.WriteLine("No son del mismo tamaño");
-                return null;
-            }
-            else
-            {
-                double[] output = new double[input1.Length];
-                for (int i = 0; i < output.Length; i++)
-                {
-                    output[i] = input1[i] - input2[i];
-                }
-                return output;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="esc"></param>
-        /// <param name="vector"></param>
-        /// <returns></returns>
-        private static double[] MultEsc(double esc, double[] vector)
-        {
-            double[] output = new double[vector.Length];
-
-            for (int i = 0; i < output.Length; i++)
-            {
-                output[i] = vector[i] * esc;
-            }
+            double[] output = Arrays.DiffArrays(err1,err2);
+            output = Arrays.MultEsc(100,Arrays.AbsArrayElement(Arrays.DivArrays(output, err1)));
+            
             return output;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <returns></returns>
-        private static double Sum(double[] vector)
-        {
-            double output = 0;
-
-            for (int i = 1; i < vector.Length; i++)
-            {
-                output = output + vector[i];
-            }
-            return output;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private static double[] AbsArrayElement(double[] input)
-        {
-            double[] output = new double[input.Length];
-
-            for (int i = 0; i < output.Length; i++)
-            {
-                output[i] = Math.Abs(input[i]);
-            }
-            return output;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <param name="esc"></param>
-        /// <returns></returns>
-        private static double[] div(double[] vector, double esc)
-        {
-            double[] output = new double[vector.Length];
-
-            for (int i = 0; i < output.Length; i++)
-            {
-                output[i] = vector[i] / esc;
-            }
-            return output;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <param name="vector2"></param>
-        /// <returns></returns>
-        private static double[] DivArrays(double[] vector, double[] vector2)
-        {
-            double[] output = new double[vector.Length];
-
-            for (int i = 0; i < output.Length; i++)
-            {
-                output[i] = vector[i] / vector2[i];
-            }
-            return output;
-        }
-
 
     }
 
