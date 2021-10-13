@@ -210,7 +210,7 @@ namespace MATLAB_Library
         {
             double output = 0;
 
-            for (int i = 1; i < vector.Length; i++)
+            for (int i = 0; i < vector.Length; i++)
             {
                 output = output + vector[i];
             }
